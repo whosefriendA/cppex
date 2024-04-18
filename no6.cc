@@ -3,6 +3,7 @@
 #include<cctype>
 #include<vector>
 #include<cstdlib>
+#include<cassert>
 using std::cout;
 using std::cin;
 using std::endl;
@@ -48,3 +49,17 @@ using std::string;
 // auto doit(int i)->int(*)[10];
 //使用decltype声明一个返回数组指针的函数
 //...
+struct Person{
+    string name;
+    string address;
+    string getname(){
+        return name;
+    }
+    string getaddress(){
+        return address;
+    }
+};
+int main(){
+    struct Person person={"wanggang","xian"};
+    cout<<person.getname()<<endl<<person.getaddress();
+}
