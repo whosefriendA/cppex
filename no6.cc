@@ -59,6 +59,7 @@ struct Person{
         return address;
     }
 };
+
 int main(){
     struct Person person={"wanggang","xian"};
     cout<<person.getname()<<endl<<person.getaddress();
