@@ -59,8 +59,10 @@ struct Person{
         return address;
     }
 };
-
 int main(){
     struct Person person={"wanggang","xian"};
     cout<<person.getname()<<endl<<person.getaddress();
 }
+// Sales_data::Sales_data(std::istream &is){
+//     read(is,*this);
+// }
