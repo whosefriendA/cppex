@@ -49,9 +49,11 @@ using std::string;
 // auto doit(int i)->int(*)[10];
 //使用decltype声明一个返回数组指针的函数
 //...
-struct Person{
+class Person{
+    public:
     string name;
     string address;
+    private:
     string getname(){
         return name;
     }
@@ -60,7 +62,7 @@ struct Person{
     }
 };
 int main(){
-    struct Person person={"wanggang","xian"};
+    class Person person={"wanggang","xian"};
     cout<<person.getname()<<endl<<person.getaddress();
 }
 // Sales_data::Sales_data(std::istream &is){
