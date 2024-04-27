@@ -11,6 +11,7 @@ for(int i=0;i<datasize;i++){
     data.push_back(dis(gen))
 }
 }
+
 int main(){
     int datasize=100000;
     int maxnum=100000;
