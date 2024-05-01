@@ -32,6 +32,33 @@ void quickSort(std::vector<int>& arr, int left, int right) {
     }
 }
 
+void mergeSortedSubarrays(const std::vector<std::vector<int>>& subarrays, std::vector<int>& sortedData) {
+    int dataSize = sortedData.size();
+    int currentIndex = 0;
+    std::vector<int> indexes(subarrays.size(), 0);
+    while (currentIndex < dataSize) {
+        int minIndex = -1;
+        int minValue = INT_MAX;
+        for (int i = 0; i < subarrays.size(); ++i) {
+            if (indexes[i] < subarrays[i].size() && subarrays[i][indexes[i]] < minValue) {
+                minIndex = i;
+                minValue = subarrays[i][indexes[i]];
+            }
+        }
+        sortedData[currentIndex++] = minValue;
+        ++indexes[minIndex];
+    }
+}
+
+void mergeThread(const std::vector<std::vector<int>>& subarrays, std::vector<int>& sortedData) {
+    // Wait until sorting is done
+    std::unique_lock<std::mutex> lock(mtx);
+    cv.wait(lock, [] { return ready; });
+
+    mergeSortedSubarrays(subarrays, sortedData);
+}
+
+
 int main(){
     int datasize=100000;
     int maxnum=100000;
@@ -47,14 +74,24 @@ int main(){
         auto end=(i==numthread-1)?data.end():data.begin()+numthread;
         mularray[i].assign(start,end);
     }
-
+    //创建线程进行排序
     std::vector<std::thread> threads;
     for(int i=0;i<numthread;i++){
         threads.emplace(quicksort,std::ref(mularray[i]),0,mularray.size()-1);
+        //threads.push_back(threads(quicksort,std::ref(mularray[i]),0,mularray.size()-1);
     }
+    std::thread merge(mergeThread, std::cref(mularrays), std::ref(data))
     for(auto &t :threads){
         t.join();
     }
 
+    {
+        std::lock_guard<std::mutex> lock(mtx);
+        ready = true;
+    }
+    cv.notify_one();
+
+    mergeThr.join();
+    
     
 }
