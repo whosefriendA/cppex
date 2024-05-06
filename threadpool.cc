@@ -1,4 +1,5 @@
 #include<iostream>
+#include<queue>
 #include<vector>
 #include<thread>
 #include<mutex>
@@ -8,14 +9,14 @@
 class Task{
     public:
     Task(std::function<void()>func):func_(func){}
-    std::opreator()(){func_();}
+    void operator()() {func_();}
     private:
     std::function<void()>func_;
-}
+};
 //线程池类
-class Threadpool{
+class ThreadPool{
     public:
-    Threadpool(int threadnum):stop_(false){
+    ThreadPool(int threadnum):stop_(false){
     if(threadnum<1)
     std::cerr<<"wrong thread number";
     for(int i=0;i<threadnum;i++){
@@ -56,12 +57,12 @@ class Threadpool{
     }
 
     private:
-    std::queue<std::function<void()>> task_;
+    std::queue<std::function<void()>> tasks_;
     std::vector<std::thread> workers_;
-    std::condition_variable conditon_;
-    std::mutex queue_mutex;
+    std::condition_variable condition_;
+    std::mutex queue_mutex_;
     bool stop_;
-}
+};
 
 //任务调度类
 class TaskScheduler {
@@ -72,9 +73,6 @@ public:
             threadPool_.enqueue(Task(std::forward<F>(task)));
         }
 
-        void shutdown() {
-             threadPool_.~ThreadPool();
-        }
 private:
     ThreadPool threadPool_;
 };
@@ -83,7 +81,7 @@ int main() {
     TaskScheduler scheduler(10); // 创建一个拥有10个线程的任务调度程序
 
     // 添加一些计算矩阵的任务到任务队列
-    for (int i = 0; i < 10; ++i) {
+    for (int i = 1; i <=10; ++i) {
         scheduler.addTask([i]() {
             // 这里模拟一个简单的任务，计算i的阶乘
             int result = 1;
@@ -93,13 +91,6 @@ int main() {
             std::cout << "Factorial of " << i << " is " << result << std::endl;
         });
     }
-
-    // 等待所有任务完成
-    // 这里可以添加更复杂的等待机制，以确保所有任务都完成
-    std::this_thread::sleep_for(std::chrono::seconds(1));
-
-    // 关闭任务调度程序和线程池
-    scheduler.shutdown();
 
     return 0;
 }
