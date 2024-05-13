@@ -25,7 +25,10 @@ class Phi{
 // }
 //方案二 使用信号量(这里只能使用c语言的信号量，c++标准库中没有对信号量的直接定义)
 int main(){
-    sem_t chop(5);
+    sem_t chop[5];
+    for(int i=0;i<5;i++){
+        sem_init(&chop[i],0,1);
+    }
     std::vector<class Phi> Philo(5);
     for(int i=0;i<phi_num;i++){
         sem_wait(&chop[i]);
@@ -34,5 +37,5 @@ int main(){
         sem_post(&chop[i]);
         sem_post(&chop[i+1]);
     }
-
+    
 }
