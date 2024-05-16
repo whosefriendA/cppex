@@ -10,21 +10,37 @@ void listInit(list_lock_t* list) {
 }
 
 void producer(list_lock_t* list, DataType value) {
-  Lnode* buf=malloc(Lnode*)(sizeof(Lnode));
-  buf.next=NULL;
-  buf.value=value
+  LNode* buf=(LNode*)malloc(sizeof(LNode));
+  buf->next=NULL;
+  buf->value=value;
   
   pthread_mutex_lock(&list->mutex);
-  buf.next=list.head;
-  list.head=buf;
+  buf->next=list->head;
+  list->head=buf;
   pthread_cond_signal(&list->cond);
   pthread_mutex_unlock(&list->mutex);
 }
 
 void consumer(list_lock_t* list) {
-   perror("This function is not implemented");
+  pthread_mutex_lock(&list->mutex);
+  while(list->head==NULL){
+    pthread_cond_wait(&list->cond,&list->mutex);
+  }
+   LNode* usedvalue=list->head;
+   list->head=list->head->next;
+   free(usedvalue);
+   pthread_mutex_unlock(&list->mutex);
+
 }
 
 int getListSize(list_lock_t* list) {
-  perror("This function is not implemented");
+  pthread_mutex_lock(&list->mutex);
+  int count;
+  LNode *current=list->head;
+  for(int i=0;current==NULL;i++){
+    current=list->head->next;
+    count=i;
+  }
+  pthread_mutex_unlock(&list->mutex);
+  return count;
 }
