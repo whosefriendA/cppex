@@ -4,11 +4,20 @@
 #include <stdlib.h>
 
 void hashInit(hash_lock_t* bucket) {
-  perror("This function is not implemented");
+  for(int i=0;i<HASHNUM;i++){
+    ///bucket->table[i].head=NULL;
+    pthread_mutex_init(&bucket->table[i].mutex,NULL);
+  }
 }
 
 int getValue(hash_lock_t* bucket, int key) {
-  perror("This function is not implemented");
+  pthread_mutex_lock(&bucket->table[HASH(key)].mutex);
+  if(bucket->table[HASH(key)].head.next==NULL){
+    printf("%d",bucket->table[HASH(key)].head.value)
+  };else{
+
+  }
+  pthread_mutex_unlock(&bucket->table[HASH(key)].mutex);
 }
 
 void insert(hash_lock_t* bucket, int key, int value) {
