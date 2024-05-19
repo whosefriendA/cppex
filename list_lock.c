@@ -37,6 +37,7 @@ int getListSize(list_lock_t* list) {
   pthread_mutex_lock(&list->mutex);
   int count;
   LNode *current=list->head;
+  
   for(int i=0;current==NULL;i++){
     current=list->head->next;
     count=i;
