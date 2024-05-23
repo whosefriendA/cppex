@@ -35,12 +35,11 @@ void consumer(list_lock_t* list) {
 
 int getListSize(list_lock_t* list) {
   pthread_mutex_lock(&list->mutex);
-  int count;
+  int count=0;
   LNode *current=list->head;
-  
-  for(int i=0;current==NULL;i++){
-    current=list->head->next;
-    count=i;
+  for(int i=0;current!=NULL;i++){
+    current=current->next;
+    count++;
   }
   pthread_mutex_unlock(&list->mutex);
   return count;
