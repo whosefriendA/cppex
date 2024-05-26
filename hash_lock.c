@@ -90,6 +90,7 @@ int setKey(hash_lock_t* bucket, int key, int new_key) {
         prev=p;
         p=p->next;
     }
+    
     if (n1 != n2) {
         pthread_mutex_unlock(&bucket->table[n2].mutex);
     }
