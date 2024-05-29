@@ -1,14 +1,6 @@
 #include<iostream>
 #include<list>
 //1.
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode(int x) : val(x), next(NULL) {}
- * };
- */
 class Solution {
 public:
     ListNode *detectCycle(ListNode *head) {
@@ -62,15 +54,6 @@ queue<int> queue1;
        return queue1.empty();
     }
 };
-
-/**
- * Your MyStack object will be instantiated and called as such:
- * MyStack* obj = new MyStack();
- * obj->push(x);
- * int param_2 = obj->pop();
- * int param_3 = obj->top();
- * bool param_4 = obj->empty();
- */
  //3.
  class MyQueue {
 public:
@@ -108,12 +91,48 @@ public:
 
     }
 };
-
-/**
- * Your MyQueue object will be instantiated and called as such:
- * MyQueue* obj = new MyQueue();
- * obj->push(x);
- * int param_2 = obj->pop();
- * int param_3 = obj->peek();
- * bool param_4 = obj->empty();
- */
+//4.
+class Solution{
+public:
+    void  traversal(TreeNode*cur,vector<int>&value){
+        if(cur==NULL)return;
+        traversal(cur->left,value);
+        value.push_back(cur->val);
+        traversal(cur->right,value);
+    }
+    vector<int> inorderTraversal(TreeNode* root) {
+        vector<int>result;
+        traversal(root,result);
+        return result;
+    }
+};
+//5.
+class Solution {
+public:
+    void  traversal(TreeNode*cur,vector<int>&value){
+        if(cur==NULL)return;
+        value.push_back(cur->val);
+        traversal(cur->left,value);
+        traversal(cur->right,value);
+    }
+    vector<int> preorderTraversal(TreeNode* root) {
+        vector<int>result;
+        traversal(root,result);
+        return result;
+    }
+};
+//6.
+class Solution {
+public:
+    void  traversal(TreeNode*cur,vector<int>&value){
+        if(cur==NULL)return;
+        traversal(cur->left,value);
+        traversal(cur->right,value);
+        value.push_back(cur->val);
+    }
+    vector<int> postorderTraversal(TreeNode* root) {
+        vector<int>result;
+        traversal(root,result);
+        return result;
+    }
+};
