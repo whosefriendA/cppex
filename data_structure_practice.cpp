@@ -22,6 +22,7 @@ public:
         return NULL;
     }
 };
+
 //2.
 class MyStack {
 public:
@@ -54,6 +55,7 @@ queue<int> queue1;
        return queue1.empty();
     }
 };
+
  //3.
  class MyQueue {
 public:
@@ -91,6 +93,7 @@ public:
 
     }
 };
+
 //4.
 class Solution{
 public:
@@ -106,6 +109,7 @@ public:
         return result;
     }
 };
+
 //5.
 class Solution {
 public:
@@ -121,6 +125,7 @@ public:
         return result;
     }
 };
+
 //6.
 class Solution {
 public:
