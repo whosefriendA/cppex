@@ -96,6 +96,7 @@ public:
 
 //4.
 class Solution{
+
 public:
     void  traversal(TreeNode*cur,vector<int>&value){
         if(cur==NULL)return;
