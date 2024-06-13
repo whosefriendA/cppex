@@ -1,7 +1,8 @@
 #include<iostream>
-#include<vetor>
+#include<vector>
 #include<thread>
 #include<random>
+#include<condition_variable>
 #include<mutex>
 
 void randomdata(std::vector<int>&data,int datasize,int maxnum,int minnum){
@@ -92,6 +93,5 @@ int main(){
     cv.notify_one();
 
     mergeThr.join();
-    
     
 }

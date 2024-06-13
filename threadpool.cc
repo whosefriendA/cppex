@@ -80,15 +80,14 @@ private:
 int main() {
     TaskScheduler scheduler(10); // 创建一个拥有10个线程的任务调度程序
 
-    // 添加一些计算矩阵的任务到任务队列
     for (int i = 1; i <=10; ++i) {
         scheduler.addTask([i]() {
-            // 这里模拟一个简单的任务，计算i的阶乘
+            // 计算i的阶乘
             int result = 1;
             for (int j = 1; j <= i; ++j) {
                 result *= j;
             }
-            std::cout << "Factorial of " << i << " is " << result << std::endl;
+            std::cout << i<<"的阶乘是" << result << std::endl;
         });
     }
 

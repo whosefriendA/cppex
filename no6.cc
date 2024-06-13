@@ -68,3 +68,5 @@ int main(){
 // Sales_data::Sales_data(std::istream &is){
 //     read(is,*this);
 // }
+// list<string>::const_iterator it=a.begin;
+// auto it1=a.begin;
