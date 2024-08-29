@@ -1,0 +1,2 @@
+INFO: Program started
+ERROR: An error occurred

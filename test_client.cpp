@@ -247,4 +247,8 @@ int main() {
     // Server 端的监听地址
     auto msg = InitTestClient("192.168.30.170:1234");
     // Put your code Here!
+        while (true) {
+        std::string message = msg->pop(); // 从msg类中弹出一个字符串
+        msg->commit(std::move(message)); // 将处理后的字符串发送给服务器
+    }
 }
