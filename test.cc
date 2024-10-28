@@ -105,6 +105,7 @@ void consumer(list_lock_t* list) {
     while (list->head == NULL) {
         pthread_cond_wait(&list->cond, &list->mutex);
     }
+    
     LNode* toDelete = list->head;
     list->head = list->head->next;
     free(toDelete);
