@@ -80,6 +80,7 @@ typedef struct {
 
 void listInit(list_lock_t* list) {
     list->head = NULL;
+    
     pthread_mutex_init(&list->mutex, NULL);
     pthread_cond_init(&list->cond, NULL);
 }
