@@ -67,6 +67,7 @@
 
 typedef int DataType;
 
+
 typedef struct node {
     DataType value;
     struct node* next;
