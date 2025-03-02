@@ -772,6 +772,7 @@ void AddPlace(AdjMatrix* G) {
 	char p[20];
 	char i[66];
 
+
 	while (flag == 1) {
 		
 		//增加地点的地名
